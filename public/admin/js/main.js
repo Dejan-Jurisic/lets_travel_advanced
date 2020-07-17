@@ -1,3 +1,5 @@
+const addPostBtn = document.querySelector('.create-post');
+
 document.addEventListener('DOMContentLoaded', async function () {
     let posts = await getPosts();
     let articles = document.querySelector('.articles');
@@ -14,4 +16,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     </article>`;
         articles.insertAdjacentHTML('afterend', postHTML)
     })
-})  
+})
+
+addPostBtn.addEventListener('click', function () {
+    const articlesTab = document.getElementById('v-pills-articles');
+    articlesTab.classList.remove('show');
+    articlesTab.classList.remove('active');
+    const crateTab = document.getElementById('v-pills-create-post');
+    crateTab.classList.add('show');
+    crateTab.classList.add('active');
+})
