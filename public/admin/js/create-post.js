@@ -2,22 +2,33 @@ let createForm = document.querySelector('.create-post-form'),
     createTitle = document.querySelector('#create-title'),
     createCountry = document.querySelector('#create-country'),
     createImageUrl = document.querySelector('#create-image-url'),
-    createText = document.querySelector('#create-text');
+    createText = document.querySelector('#create-text'),
+    createImageFile = document.querySelector('#create-image-file');
 
 createForm.addEventListener('submit', function (e) {
     e.preventDefault();
     let text = createText.value;
+    let data = new FormData();
+    data.append('title', createTitle.value);
+    data.append('country', createCountry.value);
+    data.append('imageUrl', createImageUrl.value);
+    data.append('text', text);
+    data.append('description', text.substring(0, text.indexOf('.') + 1));
+    data.append('imageFile', createImageFile.files[0]);
+
     fetch('http://localhost:3000/posts', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: createTitle.value,
-            country: createCountry.value,
-            imageUrl: createImageUrl.value,
-            text: text,
-            description: text.substring(0, text.indexOf('.') + 1)
-        })
+        body: data
     }).then((response) => response.text()).then((data) => window.history.go());
 })
+
+function disableInput(input1, input2) {
+    if (input1.value) {
+        input2.disabled = true;
+    } else {
+        input2.disabled = false;
+    }
+}
+
+createImageUrl.addEventListener('change', function () {disableInput (this,createImageFile)});
+createImageFile.addEventListener('change', function () {disableInput (this,createImageUrl)});
