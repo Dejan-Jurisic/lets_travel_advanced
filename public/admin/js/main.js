@@ -1,4 +1,4 @@
-const addPostBtn = document.querySelector('.create-post');
+let addPostBtn = document.querySelector('.create-post');
 
 document.addEventListener('DOMContentLoaded', async function () {
     let posts = await getPosts();
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         <div class="name w30">${post.title}</div>
         <div class="date w30">${post.date}</div>
         <div class="country w20">${post.country}</div>
-        <div class="edit w10"><button class="btn btn-link">Edit</button></div>
+        <div class="edit w10"><button class="btn btn-link btn-update">Edit</button></div>
         <div class="remove w5"><button class="btn btn-link btn-remove">X</button></div>
     </article>`;
         articles.insertAdjacentHTML('beforeend', postHTML)
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 
 addPostBtn.addEventListener('click', function () {
-    const articlesTab = document.getElementById('v-pills-articles');
+    let articlesTab = document.getElementById('v-pills-articles');
     articlesTab.classList.remove('show');
     articlesTab.classList.remove('active');
-    const crateTab = document.getElementById('v-pills-create-post');
+    let crateTab = document.getElementById('v-pills-create-post');
     crateTab.classList.add('show');
     crateTab.classList.add('active');
 })
