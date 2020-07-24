@@ -1,23 +1,25 @@
-let CallbackRequest = require('../models/callback-requests').CallbackRequests;
+let Email = require('../models/emails').Email;
 let uniqid = require('uniqid');
 let express = require('express'),
     router = express.Router();
 
 router.get('/', async (req, resp) => {
-    resp.send(await CallbackRequest.find());
+    resp.send(await Email.find());
 })
 router.post('/', async (req, resp) => {
     let reqBody = req.body;
-    let newRequest = new CallbackRequest({
+    let newEmail = new Email({
         id: uniqid(),
-        phoneNumber: reqBody.phoneNumber,
+        name: reqBody.name,
+        email: reqBody.email,
+        text: reqBody.text,
         date: new Date()
     })
-    await newRequest.save()
+    await newEmail.save()
     resp.send('Accepted');
 })
 router.delete('/:id', async (req, resp) => {
-    await CallbackRequest.deleteOne({
+    await Email.deleteOne({
         id: req.params.id
     });
     resp.send('Deleted');

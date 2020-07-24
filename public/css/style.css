@@ -36,6 +36,7 @@ footer .row {
 
 .article-inline {
     padding-left: 10px;
+    flex-wrap: wrap;
 }
 
 .article-inline:nth-of-type(odd) {
@@ -60,6 +61,10 @@ footer .row {
 
 .w60 {
     width: 60%;
+}
+
+.w100 {
+    width: 100%;
 }
 
 /**** Crate post ****/
