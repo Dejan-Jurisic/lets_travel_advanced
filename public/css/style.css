@@ -76,3 +76,20 @@ footer .row {
 #v-pills-create-post form div:nth-child(3) {
     margin-bottom: 0;
 }
+
+/**** Post details page ****/
+
+.sight-container {
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    padding: 15px 50px;
+}
+
+.sight-container img {
+    width: 100%;
+}
+
+.date {
+    font-weight: bold;
+}

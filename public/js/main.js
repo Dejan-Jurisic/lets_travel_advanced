@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             <div class="card-body">
                 <h4 class="card-title">${post.title}</h4>
                 <p class="card-text">${post.description}</p>
-                <button class="btn btn-primary">Details</button>
+                <a class="btn btn-primary" href="/sight">Details</a>
             </div>
         </div>
     </div>`;
