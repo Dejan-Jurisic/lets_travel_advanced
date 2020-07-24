@@ -58,6 +58,10 @@ footer .row {
     width: 30%;
 }
 
+.w60 {
+    width: 60%;
+}
+
 /**** Crate post ****/
 
 #v-pills-create-post form p {

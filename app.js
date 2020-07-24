@@ -3,6 +3,7 @@ let express = require('express'),
 let mongoose = require('mongoose');
 let multer = require('multer');
 let postsRouter = require('./routes/posts');
+let callbackRequestRouter = require('./routes/callback-requests');
 
 mongoose.connect('mongodb://localhost/travels', {
     useNewUrlParser: true
@@ -18,5 +19,6 @@ app.use(multer({
 }).single('imageFile'));
 app.use(express.static('public'));
 app.use('/posts', postsRouter);
+app.use('/callback-requests', callbackRequestRouter);
 
 app.listen(3000, () => console.log('Listening 3000... '));
