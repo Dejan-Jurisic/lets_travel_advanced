@@ -5,9 +5,8 @@ let multer = require('multer');
 let postsRouter = require('./routes/posts');
 let callbackRequestRouter = require('./routes/callback-requests');
 let emailsRouter = require('./routes/emails');
-const {
-    response
-} = require('express');
+let Post = require('./models/posts').Post;
+
 
 app.set('view engine', 'ejs');
 
@@ -28,12 +27,16 @@ app.use('/posts', postsRouter);
 app.use('/callback-requests', callbackRequestRouter);
 app.use('/emails', emailsRouter);
 
-app.get('/sight', (req, resp) => {
+app.get('/sight', async (req, resp) => {
+    let id = req.query.id;
+    let post = await Post.findOne({
+        id: id
+    });
     resp.render('sight', {
-        title:'placeholder',
-        imageURL:'https://lp-cms-production.imgix.net/news/2017/08/London.jpg?auto=format&fit=crop&q=40&sharp=10&vib=20&ixlib=react-8.6.4&w=2618',
-        date:'placeholder',
-        text:'placeholder'
+        title: post.title,
+        imageURL: post.imageURL,
+        date: post.date,
+        text: post.text
     })
 })
 
