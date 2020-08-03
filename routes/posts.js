@@ -2,6 +2,8 @@ let Post = require('../models/posts').Post;
 let uniqid = require('uniqid');
 let express = require('express'),
     router = express.Router();
+let authMiddleware = require('../middleware/auth');
+
 
 router.get('/', async (req, resp) => {
     let posts = await Post.find();
@@ -14,7 +16,7 @@ router.get('/:id', async (req, resp) => {
     });
     resp.send(post);
 })
-router.post('/', async (req, resp) => {
+router.post('/', authMiddleware, async (req, resp) => {
     let reqBody = req.body;
     let imagePath;
     if (reqBody.imageUrl) {
@@ -35,17 +37,19 @@ router.post('/', async (req, resp) => {
     await newPost.save();
     resp.send('Created');
 })
-router.delete('/:id', async (req, resp) => {
+router.delete('/:id', authMiddleware, async (req, resp) => {
     let id = req.params.id;
     await Post.deleteOne({
         id: id
     });
     resp.send('Deleted');
 })
-router.put('/:id', async (req, resp) => {
+router.put('/:id', authMiddleware, async (req, resp) => {
     let id = req.params.id;
-    await Post.updateOne({id: id }, req.body);
+    await Post.updateOne({
+        id: id
+    }, req.body);
     resp.send('Updated');
 })
- 
+
 module.exports = router;
